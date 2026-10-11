@@ -36,6 +36,11 @@ public partial class MainWindow : Window
         Animals.Add(new Lion("Lion"));
     }
 
+    private void AddTigerButton_Click(object sender, RoutedEventArgs e)
+    {
+        Animals.Add(new Tiger("Tiger"));
+    }
+
     private void AnimalsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         selectedAnimal = AnimalsList.SelectedItem as Animal;

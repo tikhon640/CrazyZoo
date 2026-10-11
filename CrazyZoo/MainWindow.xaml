@@ -67,6 +67,9 @@
             <Button Content="Add Lion"
                     Margin="5"
                     Click="AddLionButton_Click"/>
+            <Button Content="Add Tiger"
+                    Margin="5"
+                    Click="AddTigerButton_Click"/>
 
             <Button Content="Normal Action"
                     Margin="5"
