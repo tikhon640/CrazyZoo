@@ -1,0 +1,96 @@
+﻿<Window x:Class="CrazyZoo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Crazy Zoo"
+        Height="600"
+        Width="1000">
+
+    <Grid Margin="10">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="AnimalsList"
+                 Grid.Column="0"
+                 SelectionChanged="AnimalsList_SelectionChanged">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1"
+                            Margin="3"
+                            Padding="5">
+
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}"
+                                       FontWeight="Bold"/>
+
+                            <TextBlock Text="{Binding Energy}"/>
+                        </StackPanel>
+
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
+        <StackPanel Grid.Column="1"
+                    Margin="10">
+
+            <TextBlock Text="Animal Details"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Margin="5"/>
+
+            <TextBlock x:Name="NameText"
+                       FontSize="16"
+                       Margin="5"/>
+
+            <TextBlock x:Name="EnergyText"
+                       FontSize="16"
+                       Margin="5"/>
+
+            <Button Content="Add Monkey"
+                    Margin="5"
+                    Click="AddMonkeyButton_Click"/>
+
+            <Button Content="Add Penguin"
+                    Margin="5"
+                    Click="AddPenguinButton_Click"/>
+
+            <Button Content="Add Lion"
+                    Margin="5"
+                    Click="AddLionButton_Click"/>
+
+            <Button Content="Normal Action"
+                    Margin="5"
+                    Click="NormalAction_Click"/>
+
+            <Button Content="Crazy Action"
+                    Margin="5"
+                    Click="CrazyAction_Click"/>
+
+            <Button Content="Special Action"
+                    Margin="5"
+                    Click="SpecialAction_Click"/>
+
+            <Button Content="Remove Animal"
+                    Margin="5"
+                    Click="RemoveAnimal_Click"/>
+
+        </StackPanel>
+
+        <ListBox x:Name="LogList"
+                 Grid.Row="1"
+                 Grid.ColumnSpan="2"
+                 Margin="5"/>
+
+    </Grid>
+
+</Window>
