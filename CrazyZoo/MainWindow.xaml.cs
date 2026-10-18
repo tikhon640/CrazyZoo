@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using CrazyZoo.Core.Interfaces;
 using CrazyZoo.Core.Models;
+using CrazyZoo.ViewModels;
 
 namespace CrazyZoo;
 
@@ -15,6 +16,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+
+        DataContext = new MainViewModel();
 
         Animals = new ObservableCollection<Animal>();
 
@@ -40,6 +43,7 @@ public partial class MainWindow : Window
     {
         Animals.Add(new Tiger("Tiger"));
     }
+    
 
     private void AnimalsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
