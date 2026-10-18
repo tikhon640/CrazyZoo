@@ -1,70 +1,95 @@
-Crazy Zoo
-Eesmärk
+# Crazy Zoo
+
+## Eesmärk
+
 Crazy Zoo on humoorikas WPF-rakendus, kus erinevad loomad elavad samas loomaaaias ja käituvad erinevalt.
 
-Projekti struktuur
-CrazyZoo.Core
-CrazyZoo (WPF)
-Core sisaldab äriloogikat ja klasside hierarhiat. WPF projekt sisaldab kasutajaliidest.
+## Projekti struktuur
 
-Klassihierarhia
+- CrazyZoo.Core
+- CrazyZoo (WPF)
+
+Core sisaldab äriloogikat ja klasside hierarhiat.  
+WPF projekt sisaldab kasutajaliidest.
+
+## Klassihierarhia
+
 Animal
 
-Monkey
-Penguin
-Lion
-Tiger
-Liidesed
-IClimb
-ISwimmable
-IFly
+- Monkey
+- Penguin
+- Lion
+- Tiger
+
+## Liidesed
+
+- IClimb
+- ISwimmable
+- IFly
+
 Monkey rakendab kahte liidest:
 
-IClimb
-IFly
-CrazyAction tegevused
-Monkey
+- IClimb
+- IFly
+
+## CrazyAction tegevused
+
+### Monkey
 Varastab külastajalt telefoni ja teeb selfi.
 
-Penguin
+### Penguin
 Korraldab pingviinide diskoteegi.
 
-Lion
+### Lion
 Hakkab loomaaia giidiks.
 
-Tiger
+### Tiger
 Mängib külastajatega peitust.
 
-Funktsioonid
-Loomade lisamine
-Loomade eemaldamine
-Normal Action
-Crazy Action
-Special Action
-Tegevuste logi
-Kasutatud WPF elemendid
-ListBox
-Button
-TextBlock
-DataTemplate
-StackPanel
-Grid
-Kasutusjuhud
-Lisa Monkey.
-Lisa Penguin.
-Lisa Lion.
-Lisa Tiger.
-Käivita Crazy Action.
-Käivita Special Action.
-Eemalda loom.
-GitHub koostöö
-Issue: Add new animal to CrazyZoo
+## Funktsioonid
 
-Branch: feature-new-animal
+- Loomade lisamine
+- Loomade eemaldamine
+- Normal Action
+- Crazy Action
+- Special Action
+- Tegevuste logi
 
-Pull Request: Added Tiger animal
+## Kasutatud WPF elemendid
+
+- ListBox
+- Button
+- TextBlock
+- DataTemplate
+- StackPanel
+- Grid
+
+## Kasutusjuhud
+
+1. Lisa Monkey.
+2. Lisa Penguin.
+3. Lisa Lion.
+4. Lisa Tiger.
+5. Käivita Crazy Action.
+6. Käivita Special Action.
+7. Eemalda loom.
+
+## GitHub koostöö
+
+### Issue
+
+Add new animal to CrazyZoo
+
+### Branch
+
+feature-new-animal
+
+### Pull Request
+
+Added Tiger animal
 
 Projektis kasutati GitHub Issue, Branch, Pull Request ja Merge töövoogu.
 
-AI kasutamine
+## AI kasutamine
+
 Kasutasin tehisintellekti õppematerjalina ülesande nõuete selgitamiseks, lahenduse kontrollimiseks ja dokumentatsiooni koostamisel. Lõpliku lahenduse koostasin, testisin ja kohandasin iseseisvalt.
