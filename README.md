@@ -86,3 +86,67 @@ GroupBy()
 
 ## MVVM
 
+Projektis kasutatakse:
+
+- MainViewModel
+- INotifyPropertyChanged
+- ICommand
+- RelayCommand
+
+ViewModel haldab loomade andmeid ja rakenduse loogikat.
+
+## Loomade tegevused
+
+Igal loomal on:
+
+- NormalAction()
+- CrazyAction()
+
+Mõned loomad kasutavad eriliideseid:
+
+- Fly()
+- Climb()
+- Swim()
+
+## Funktsioonid
+
+- Loomade lisamine
+- Loomade eemaldamine
+- Normal Action
+- Crazy Action
+- Special Action
+- Loomade kuvamine
+- Tegevuste logi
+
+## GitHub koostöö
+
+Projektis kasutati:
+
+- GitHub Repository
+- Issue
+- Branch
+- Pull Request
+- Merge
+
+Koostöö käigus lisati projektile uus loomaliik Tiger.
+
+## Uued loomad Vol.2 töö jaoks
+
+Lisatud loomad:
+
+- Tiger
+- Elephant
+- Zebra
+- Giraffe
+
+## AI kasutamine
+
+Kasutasin tehisintellekti õppematerjalide selgitamiseks, dokumentatsiooni koostamiseks ning lahenduse kontrollimiseks. Lõplik lahendus on koostatud, kohandatud ja testitud iseseisvalt.
+
+## Käivitamine
+
+1. Ava lahendus Visual Studios.
+2. Määra käivitatavaks projektiks CrazyZoo.
+3. Build Solution.
+4. Käivita rakendus.
+5. Lisa loomi ning kasuta Normal Action, Crazy Action ja Special Action funktsioone.
