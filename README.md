@@ -2,15 +2,27 @@
 
 ## Eesmärk
 
-Crazy Zoo on humoorikas WPF-rakendus, kus erinevad loomad elavad samas loomaaaias ja käituvad erinevalt.
+Crazy Zoo on WPF rakendus, mis demonstreerib objektorienteeritud programmeerimist, sündmusi, LINQ päringuid, MVVM mustrit ja GitHub koostööd.
 
 ## Projekti struktuur
 
-- CrazyZoo.Core
-- CrazyZoo (WPF)
+### CrazyZoo.Core
 
-Core sisaldab äriloogikat ja klasside hierarhiat.  
-WPF projekt sisaldab kasutajaliidest.
+Sisaldab:
+
+- Animal baasklassi
+- loomaklasse
+- liideseid
+- Repository mustrit
+- sündmusi
+
+### CrazyZoo
+
+Sisaldab:
+
+- WPF kasutajaliidest
+- MainWindow
+- MainViewModel
 
 ## Klassihierarhia
 
@@ -20,76 +32,57 @@ Animal
 - Penguin
 - Lion
 - Tiger
+- Elephant
+- Zebra
+- Giraffe
 
 ## Liidesed
 
 - IClimb
+- IFly
 - ISwimmable
-- IFly
 
-Monkey rakendab kahte liidest:
+## Repository Pattern
 
-- IClimb
-- IFly
+Projektis kasutatakse:
 
-## CrazyAction tegevused
+- IRepository<T>
+- Repository<T>
+- ZooRepository
 
-### Monkey
-Varastab külastajalt telefoni ja teeb selfi.
+Repository võimaldab loomade lisamist, eemaldamist ja otsimist.
 
-### Penguin
-Korraldab pingviinide diskoteegi.
+## Sündmused
 
-### Lion
-Hakkab loomaaia giidiks.
+Projektis kasutatakse järgmisi sündmusi:
 
-### Tiger
-Mängib külastajatega peitust.
+- AnimalAdded
+- AnimalRemoved
+- CrazyActionPerformed
 
-## Funktsioonid
+Sündmused teavitavad süsteemi loomade lisamisest, eemaldamisest ja CrazyAction tegevustest.
 
-- Loomade lisamine
-- Loomade eemaldamine
-- Normal Action
-- Crazy Action
-- Special Action
-- Tegevuste logi
+## LINQ
 
-## Kasutatud WPF elemendid
+Projektis kasutatakse LINQ päringuid:
 
-- ListBox
-- Button
-- TextBlock
-- DataTemplate
-- StackPanel
-- Grid
+### Filtreerimine
 
-## Kasutusjuhud
+```csharp
+Where()
+```
 
-1. Lisa Monkey.
-2. Lisa Penguin.
-3. Lisa Lion.
-4. Lisa Tiger.
-5. Käivita Crazy Action.
-6. Käivita Special Action.
-7. Eemalda loom.
+### Sorteerimine
 
-## GitHub koostöö
+```csharp
+OrderBy()
+```
 
-### Issue
+### Grupeerimine
 
-Add new animal to CrazyZoo
+```csharp
+GroupBy()
+```
 
-### Branch
+## MVVM
 
-feature-new-animal
-
-### Pull Request
-
-Added Tiger animal
-
-Projektis kasutati GitHub Issue, Branch, Pull Request ja Merge töövoogu.
-
-## AI kasutamine
-
-Kasutasin tehisintellekti õppematerjalina ülesande nõuete selgitamiseks, lahenduse kontrollimiseks ja dokumentatsiooni koostamisel. Lõpliku lahenduse koostasin, testisin ja kohandasin iseseisvalt.
