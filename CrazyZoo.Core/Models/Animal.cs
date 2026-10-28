@@ -22,6 +22,9 @@ public abstract class Animal
 
     protected Animal(string name, int energy)
     {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name cannot be empty.");
+
         Name = name;
         Energy = energy;
     }

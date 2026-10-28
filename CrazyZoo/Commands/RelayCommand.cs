@@ -7,9 +7,6 @@ public class RelayCommand : ICommand
     private readonly Action execute;
     private readonly Func<bool>? canExecute;
 
-    public RelayCommand(
-        Action execute,
-        Func<bool>? canExecute = null)
     {
         this.execute = execute;
         this.canExecute = canExecute;
@@ -17,8 +14,6 @@ public class RelayCommand : ICommand
 
     public bool CanExecute(object? parameter)
     {
-        return canExecute == null ||
-               canExecute();
     }
 
     public void Execute(object? parameter)

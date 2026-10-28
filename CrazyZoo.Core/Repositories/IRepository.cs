@@ -9,7 +9,7 @@ public interface IRepository<T>
 
     void Remove(T item);
 
-    IReadOnlyCollection<T> GetAll();
 
     T? Find(Func<T, bool> predicate);
 }
+

@@ -6,15 +6,13 @@ using CrazyZoo.Core.Events;
 using CrazyZoo.Core.Interfaces;
 using CrazyZoo.Core.Models;
 using CrazyZoo.Core.Repositories;
-
 namespace CrazyZoo.ViewModels;
+
+using System.Windows.Input;
+using CrazyZoo.Commands;
 
 public class MainViewModel : INotifyPropertyChanged
 {
-    private readonly MonkeyRepository monkeyRepository = new();
-    private readonly PenguinRepository penguinRepository = new();
-    private readonly LionRepository lionRepository = new();
-    private readonly TigerRepository tigerRepository = new();
 
     public ObservableCollection<Animal> Animals { get; } = new();
 
@@ -61,37 +59,18 @@ public class MainViewModel : INotifyPropertyChanged
 
     public MainViewModel()
     {
-        Subscribe(monkeyRepository);
-        Subscribe(penguinRepository);
-        Subscribe(lionRepository);
-        Subscribe(tigerRepository);
-
         AddMonkeyCommand = new RelayCommand(AddMonkey);
         AddPenguinCommand = new RelayCommand(AddPenguin);
         AddLionCommand = new RelayCommand(AddLion);
         AddTigerCommand = new RelayCommand(AddTiger);
-
-        RemoveAnimalCommand = new RelayCommand(RemoveAnimal);
-        NormalActionCommand = new RelayCommand(NormalAction);
-        CrazyActionCommand = new RelayCommand(CrazyAction);
-        SpecialActionCommand = new RelayCommand(SpecialAction);
     }
 
-    private void Subscribe<T>(AnimalRepositoryBase<T> repository)
-        where T : Animal
     {
-        repository.AnimalAdded += AnimalAdded;
-        repository.AnimalRemoved += AnimalRemoved;
-        repository.CrazyActionPerformed += CrazyActionPerformed;
-        repository.ReactionGenerated += ReactionGenerated;
     }
 
-    private void AnimalAdded(object? sender, AnimalEventArgs e)
     {
-        Log.Add($"{e.SourceAnimal.Name} added");
     }
 
-    private void AnimalRemoved(object? sender, AnimalEventArgs e)
     {
         Log.Add($"{e.SourceAnimal.Name} removed");
     }
@@ -106,172 +85,43 @@ public class MainViewModel : INotifyPropertyChanged
         Log.Add(e.Message);
     }
 
-    private void AddMonkey()
-    {
-        var animal = new Monkey("Monkey");
-
-        monkeyRepository.AddAnimal(animal);
-
-        Animals.Add(animal);
-
-        RefreshCollections();
     }
 
-    private void AddPenguin()
     {
-        var animal = new Penguin("Penguin");
 
-        penguinRepository.AddAnimal(animal);
 
-        Animals.Add(animal);
-
-        RefreshCollections();
     }
 
-    private void AddLion()
     {
-        var animal = new Lion("Lion");
 
-        lionRepository.AddAnimal(animal);
 
-        Animals.Add(animal);
-
-        RefreshCollections();
     }
 
-    private void AddTiger()
     {
-        var animal = new Tiger("Tiger");
 
-        tigerRepository.AddAnimal(animal);
 
-        Animals.Add(animal);
-
-        RefreshCollections();
     }
-
-    private void RemoveAnimal()
     {
         if (SelectedAnimal == null)
             return;
 
-        switch (SelectedAnimal)
-        {
-            case Monkey monkey:
-                monkeyRepository.RemoveAnimal(monkey);
-                break;
-
-            case Penguin penguin:
-                penguinRepository.RemoveAnimal(penguin);
-                break;
-
-            case Lion lion:
-                lionRepository.RemoveAnimal(lion);
-                break;
-
-            case Tiger tiger:
-                tigerRepository.RemoveAnimal(tiger);
-                break;
-        }
-
-        Animals.Remove(SelectedAnimal);
-
-        SelectedAnimal = null;
-
-        RefreshCollections();
     }
 
-    private void NormalAction()
     {
-        if (SelectedAnimal == null)
-            return;
 
-        Log.Add(SelectedAnimal.NormalAction());
 
-        OnPropertyChanged(nameof(SelectedAnimal));
+    }
+    {
     }
 
-    private void CrazyAction()
     {
-        if (SelectedAnimal == null)
-            return;
-
-        switch (SelectedAnimal)
-        {
-            case Monkey monkey:
-                monkeyRepository.PerformCrazyAction(monkey);
-                break;
-
-            case Penguin penguin:
-                penguinRepository.PerformCrazyAction(penguin);
-                break;
-
-            case Lion lion:
-                lionRepository.PerformCrazyAction(lion);
-                break;
-
-            case Tiger tiger:
-                tigerRepository.PerformCrazyAction(tiger);
-                break;
-        }
-
-        OnPropertyChanged(nameof(SelectedAnimal));
     }
 
-    private void SpecialAction()
     {
-        if (SelectedAnimal == null)
-            return;
-
-        if (SelectedAnimal is IFly flyer)
-        {
-            Log.Add(flyer.Fly());
-        }
-        else if (SelectedAnimal is IClimb climber)
-        {
-            Log.Add(climber.Climb());
-        }
-        else if (SelectedAnimal is ISwimmable swimmer)
-        {
-            Log.Add(swimmer.Swim());
-        }
-
-        OnPropertyChanged(nameof(SelectedAnimal));
     }
-
-    private void RefreshCollections()
     {
-        ApplyFilter();
-        UpdateStatistics();
-    }
-
-    private void ApplyFilter()
-    {
-        FilteredAnimals.Clear();
-
-        var filtered = Animals
-            .Where(a => a.Name.Contains(
-                SearchText,
-                StringComparison.OrdinalIgnoreCase))
-            .OrderBy(a => a.Name);
-
-        foreach (var animal in filtered)
         {
-            FilteredAnimals.Add(animal);
-        }
-    }
-
-    private void UpdateStatistics()
-    {
-        Statistics.Clear();
-
-        var groups = Animals
-            .GroupBy(a => a.GetType().Name)
-            .OrderBy(g => g.Key);
-
-        foreach (var group in groups)
-        {
-            Statistics.Add($"{group.Key}: {group.Count()}");
+            {
         }
     }
 
