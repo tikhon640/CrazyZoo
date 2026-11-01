@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\CrazyZoo.Core\" />
+    <Compile Remove="Models\CrazyZoo.Core\**" />
+    <EmbeddedResource Remove="Models\CrazyZoo.Core\**" />
+    <None Remove="Models\CrazyZoo.Core\**" />
   </ItemGroup>
 
 </Project>
