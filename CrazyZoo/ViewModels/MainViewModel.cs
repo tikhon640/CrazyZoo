@@ -6,6 +6,8 @@ using CrazyZoo.Core.Events;
 using CrazyZoo.Core.Interfaces;
 using CrazyZoo.Core.Models;
 using CrazyZoo.Core.Repositories;
+using CrazyZoo.Services;
+using System.Diagnostics;
 
 namespace CrazyZoo.ViewModels;
 
@@ -26,6 +28,35 @@ public class MainViewModel : INotifyPropertyChanged
     public ObservableCollection<string> Log { get; } = new();
 
     public ObservableCollection<string> Statistics { get; } = new();
+    public ObservableCollection<CalculationResult> Results { get; } = new();
+
+    private readonly CalculationRunner calculationRunner = new();
+
+    private CancellationTokenSource? cancellationTokenSource;
+
+    private int workload = 10000000;
+
+    public int Workload
+    {
+        get => workload;
+        set
+        {
+            workload = value;
+            OnPropertyChanged(nameof(Workload));
+        }
+    }
+
+    private string executionTime = "";
+
+    public string ExecutionTime
+    {
+        get => executionTime;
+        set
+        {
+            executionTime = value;
+            OnPropertyChanged(nameof(ExecutionTime));
+        }
+    }
 
     private Animal? selectedAnimal;
 
@@ -64,6 +95,9 @@ public class MainViewModel : INotifyPropertyChanged
     public ICommand NormalActionCommand { get; }
     public ICommand CrazyActionCommand { get; }
     public ICommand SpecialActionCommand { get; }
+    public ICommand RunSequentialCommand { get; }
+    public ICommand RunParallelCommand { get; }
+    public ICommand CancelCommand { get; }
 
     public MainViewModel()
     {
@@ -87,6 +121,14 @@ public class MainViewModel : INotifyPropertyChanged
         NormalActionCommand = new RelayCommand(NormalAction);
         CrazyActionCommand = new RelayCommand(CrazyAction);
         SpecialActionCommand = new RelayCommand(SpecialAction);
+        RunSequentialCommand =
+    new RelayCommand(async () => await RunSequential());
+
+        RunParallelCommand =
+            new RelayCommand(async () => await RunParallel());
+
+        CancelCommand =
+            new RelayCommand(CancelCalculations);
     }
 
     private void Subscribe<T>(AnimalRepositoryBase<T> repository)
@@ -342,6 +384,70 @@ public class MainViewModel : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
+    private async Task RunSequential()
+    {
+        
+
+        Results.Clear();
+
+        cancellationTokenSource = new CancellationTokenSource();
+
+        var stopwatch = Stopwatch.StartNew();
+
+        var animals = Animals.Take(3);
+
+        var results = await calculationRunner.RunSequential(
+            animals,
+            Workload,
+            cancellationTokenSource.Token);
+
+        foreach (var result in results)
+        {
+            Results.Add(result);
+        }
+        
+
+        stopwatch.Stop();
+
+        ExecutionTime =
+            $"Sequential: {stopwatch.Elapsed.TotalSeconds:F2} sec";
+    }
+
+    private async Task RunParallel()
+    {
+        
+
+        Results.Clear();
+
+        cancellationTokenSource = new CancellationTokenSource();
+
+        var stopwatch = Stopwatch.StartNew();
+
+        var animals = Animals.Take(3);
+
+        var results = await calculationRunner.RunParallel(
+            animals,
+            Workload,
+            cancellationTokenSource.Token);
+
+        
+
+        foreach (var result in results)
+        {
+            Results.Add(result);
+        }
+        
+
+        stopwatch.Stop();
+
+        ExecutionTime =
+            $"Parallel: {stopwatch.Elapsed.TotalSeconds:F2} sec";
+    }
+
+    private void CancelCalculations()
+    {
+        cancellationTokenSource?.Cancel();
+    }
 
     private void OnPropertyChanged(string propertyName)
     {
