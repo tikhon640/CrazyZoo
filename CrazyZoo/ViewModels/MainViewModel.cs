@@ -15,6 +15,9 @@ public class MainViewModel : INotifyPropertyChanged
     private readonly PenguinRepository penguinRepository = new();
     private readonly LionRepository lionRepository = new();
     private readonly TigerRepository tigerRepository = new();
+    private readonly BearRepository bearRepository = new();
+    private readonly WolfRepository wolfRepository = new();
+    private readonly FoxRepository foxRepository = new();
 
     public ObservableCollection<Animal> Animals { get; } = new();
 
@@ -53,6 +56,9 @@ public class MainViewModel : INotifyPropertyChanged
     public ICommand AddPenguinCommand { get; }
     public ICommand AddLionCommand { get; }
     public ICommand AddTigerCommand { get; }
+    public ICommand AddBearCommand { get; }
+    public ICommand AddWolfCommand { get; }
+    public ICommand AddFoxCommand { get; }
 
     public ICommand RemoveAnimalCommand { get; }
     public ICommand NormalActionCommand { get; }
@@ -65,11 +71,17 @@ public class MainViewModel : INotifyPropertyChanged
         Subscribe(penguinRepository);
         Subscribe(lionRepository);
         Subscribe(tigerRepository);
+        Subscribe(bearRepository);
+        Subscribe(wolfRepository);
+        Subscribe(foxRepository);
 
         AddMonkeyCommand = new RelayCommand(AddMonkey);
         AddPenguinCommand = new RelayCommand(AddPenguin);
         AddLionCommand = new RelayCommand(AddLion);
         AddTigerCommand = new RelayCommand(AddTiger);
+        AddBearCommand = new RelayCommand(AddBear);
+        AddWolfCommand = new RelayCommand(AddWolf);
+        AddFoxCommand = new RelayCommand(AddFox);
 
         RemoveAnimalCommand = new RelayCommand(RemoveAnimal);
         NormalActionCommand = new RelayCommand(NormalAction);
@@ -147,9 +159,41 @@ public class MainViewModel : INotifyPropertyChanged
 
         Animals.Add(animal);
 
+        RefreshCollections(); }
+        
+        private void AddBear()
+    {
+        var animal = new Bear("Bear");
+
+        bearRepository.AddAnimal(animal);
+
+        Animals.Add(animal);
+
         RefreshCollections();
     }
 
+    private void AddWolf()
+    {
+        var animal = new Wolf("Wolf");
+
+        wolfRepository.AddAnimal(animal);
+
+        Animals.Add(animal);
+
+        RefreshCollections();
+    }
+
+    private void AddFox()
+    {
+        var animal = new Fox("Fox");
+
+        foxRepository.AddAnimal(animal);
+
+        Animals.Add(animal);
+
+        RefreshCollections();
+    }
+    
     private void RemoveAnimal()
     {
         if (SelectedAnimal == null)
@@ -171,6 +215,17 @@ public class MainViewModel : INotifyPropertyChanged
 
             case Tiger tiger:
                 tigerRepository.RemoveAnimal(tiger);
+                break;
+            case Bear bear:
+                bearRepository.RemoveAnimal(bear);
+                break;
+
+            case Wolf wolf:
+                wolfRepository.RemoveAnimal(wolf);
+                break;
+
+            case Fox fox:
+                foxRepository.RemoveAnimal(fox);
                 break;
         }
 
@@ -212,6 +267,17 @@ public class MainViewModel : INotifyPropertyChanged
 
             case Tiger tiger:
                 tigerRepository.PerformCrazyAction(tiger);
+                break;
+            case Bear bear:
+                bearRepository.PerformCrazyAction(bear);
+                break;
+
+            case Wolf wolf:
+                wolfRepository.PerformCrazyAction(wolf);
+                break;
+
+            case Fox fox:
+                foxRepository.PerformCrazyAction(fox);
                 break;
         }
 

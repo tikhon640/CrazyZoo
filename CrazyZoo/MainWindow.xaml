@@ -83,6 +83,17 @@
             <Button Content="Add Tiger"
                     Margin="5"
                     Command="{Binding AddTigerCommand}"/>
+            <Button Content="Add Bear"
+        Margin="5"
+        Command="{Binding AddBearCommand}"/>
+
+            <Button Content="Add Wolf"
+        Margin="5"
+        Command="{Binding AddWolfCommand}"/>
+
+            <Button Content="Add Fox"
+        Margin="5"
+        Command="{Binding AddFoxCommand}"/>
 
             <Button Content="Normal Action"
                     Margin="5"
